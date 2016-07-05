@@ -1,6 +1,7 @@
-body {
-    background-color: red;
+p {
+    margin: 0;
+    padding: 0;
 }
-table.data-table1 {
-    border-collapse: separate;
+td, th {
+    padding: 5px;
 }

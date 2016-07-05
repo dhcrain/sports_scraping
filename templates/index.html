@@ -4,9 +4,9 @@
     <head>
         <meta charset="utf-8">
         <title>NFL.com Player Search</title>
-        <link rel="stylesheet" href="{% static "app/main.css" %}">
         <!-- Compiled and minified CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+        <link rel="stylesheet" href="{% static "app/main.css" %}">
     </head>
     <body>
         <div class="container">
@@ -15,7 +15,7 @@
                 <br>
                 <h6>Search NFL players by name</h6>
                 <form class="" action="" method="">
-                    <input type="text" name="player_name" value="Search">
+                    <input type="text" name="player_name" value="" placeholder="Full Name">
                     <p>
                         <input name="player_type" type="radio" id="test1" value="current" CHECKED/>
                         <label for="test1">Current</label>
@@ -27,13 +27,17 @@
                     </p>
                 </form>
             </div>
-            <div class="col s10">
+            <div class="col s1"></div>
+            <div class="col s9">
                 <br>
+                <h1>{{ no_player }}</h1>
                 <h1>{{ player_name }}</h1>
 
                 {% autoescape off %}
                 {{ player_bio }}
-                {{ stats }}
+                <div class="striped">
+                    {{ stats }}
+                </div>
                 {% endautoescape %}
             </div>
         </div>

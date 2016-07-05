@@ -13,4 +13,5 @@ url = base_url + elements.a.attrs['href']
 
 content = requests.get(url)
 souper = BeautifulSoup(content.text, "html.parser")
-print(souper.find(class_="data-table1"))
+print(souper)
+# print(souper.find(class_="data-table1"))
