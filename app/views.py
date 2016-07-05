@@ -8,7 +8,6 @@ from bs4 import BeautifulSoup
 def sports_scraping_index(request):
     player_name = request.GET.get("player_name") or "John Simon"
     player_type = request.GET.get("player_type")
-    print(player_type)
     search_url = "http://www.nfl.com/players/search?category=name&filter={}&playerType={}".format(player_name, player_type)
     content = requests.get(search_url).text
     souper = BeautifulSoup(content, "html.parser")
@@ -17,8 +16,10 @@ def sports_scraping_index(request):
     url = base_url + elements.a.attrs['href']
     content = requests.get(url)
     souper = BeautifulSoup(content.text, "html.parser")
-    stats = str(souper.find_all(class_="data-table1"))
+    player_bio = str(souper.find(id="player-bio"))
+    stats = str(souper.find(id="player-stats-wrapper"))
     context = {
+    "player_bio": player_bio,
     "stats": stats,
     "player_name": player_name
     }

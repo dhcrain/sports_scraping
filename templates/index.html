@@ -1,8 +1,10 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
         <title>NFL.com Player Search</title>
+        <link rel="stylesheet" href="{% static "app/main.css" %}">
         <!-- Compiled and minified CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
     </head>
@@ -11,8 +13,9 @@
         <div class="row">
             <div class="col s2">
                 <br>
+                <h6>Search NFL players by name</h6>
                 <form class="" action="" method="">
-                    <input type="text" name="player_name" value="">
+                    <input type="text" name="player_name" value="Search">
                     <p>
                         <input name="player_type" type="radio" id="test1" value="current" CHECKED/>
                         <label for="test1">Current</label>
@@ -20,14 +23,16 @@
                         <label for="test2">Historical</label>
                     </p>
                     <p>
-                        <input type="submit" value="Search">
+                        <input class="btn waves-effect waves-light" type="submit" value="Search">
                     </p>
                 </form>
             </div>
             <div class="col s10">
                 <br>
                 <h1>{{ player_name }}</h1>
+
                 {% autoescape off %}
+                {{ player_bio }}
                 {{ stats }}
                 {% endautoescape %}
             </div>
