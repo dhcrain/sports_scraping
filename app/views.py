@@ -11,7 +11,6 @@ def sports_scraping_index(request):
     base_url = "http://www.nfl.com/"
     player_name = request.GET.get("player_name") or "John Simon"
     player_type = request.GET.get("player_type")
-    player_name = player_name.title() # makes it display nice on the page, errors when I put it other places.
     search_url =  base_url + "players/search?category=name&filter={}&playerType={}".format(player_name, player_type)
     content = requests.get(search_url).text
     souper = BeautifulSoup(content, "html.parser")
@@ -23,7 +22,7 @@ def sports_scraping_index(request):
         context = {
         "player_bio": str(souper.find(id="player-bio")),
         "stats": str(souper.find(id="player-stats-wrapper")),
-        "player_name": player_name
+        "player_name": player_name.title()
         }
     except AttributeError:
         context = {"no_player": "There are no results for {}, please refine your search".format(player_name),}
