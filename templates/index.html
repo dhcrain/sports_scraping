@@ -7,13 +7,13 @@
         <!-- Compiled and minified CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
         <link rel="stylesheet" href="{% static "app/main.css" %}">
+        <base href="http://www.nfl.com/"/>
     </head>
     <body>
         <div class="container">
         <div class="row">
-            <div class="col s2">
-                <br>
-                <h6>Search NFL players by name</h6>
+            <div class="col s3">
+                <h6>Search NFL players by full name</h6>
                 <form class="" action="" method="">
                     <input type="text" name="player_name" value="" placeholder="Full Name">
                     <p>
@@ -28,19 +28,29 @@
                 </form>
             </div>
             <div class="col s1"></div>
-            <div class="col s9">
-                <br>
-                <h1>{{ no_player }}</h1>
+            <div class="col s8">
+                {% if player_name %}
                 <h1>{{ player_name }}</h1>
-
+                {% else %}
+                <h1>{{ no_player }}</h1>
+                {% endif %}
+                <hr>
                 {% autoescape off %}
+                {% if player_bio %}
                 {{ player_bio }}
-                <div class="striped">
-                    {{ stats }}
-                </div>
+                <hr>
+                {{ stats }}
+                {% else %}
+                <p>
+                    No stats to display, not a valid search, please check the spelling of the name. Also must search by full name.
+                </p>
+                {% endif %}
                 {% endautoescape %}
             </div>
         </div>
     </div>
+    <!--Import jQuery before materialize.js-->
+    {# <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>#}
+    {# <script type="text/javascript" src={% static "app/main.js" %}></script>#}
     </body>
 </html>
