@@ -2,6 +2,7 @@ from django.shortcuts import render
 import requests
 from bs4 import BeautifulSoup
 from django.http import Http404
+from app.models import NflSearch
 
 
 # Create your views here.
@@ -19,9 +20,12 @@ def sports_scraping_index(request):
         url = base_url + elements.a.attrs['href']
         content = requests.get(url)
         souper = BeautifulSoup(content.text, "html.parser")
+        player_bio = str(souper.find(id="player-bio"))
+        stats = str(souper.find(id="player-stats-wrapper"))
+        NflSearch.objects.create(player_bio=player_bio, stats=stats, player_name=player_name)
         context = {
-        "player_bio": str(souper.find(id="player-bio")),
-        "stats": str(souper.find(id="player-stats-wrapper")),
+        "player_bio": player_bio,
+        "stats": stats,
         "player_name": player_name.title()
         }
     except AttributeError:
