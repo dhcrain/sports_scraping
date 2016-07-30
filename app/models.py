@@ -7,3 +7,6 @@ class NflSearch(models.Model):
     stats = models.TextField()
     player_name = models.CharField(max_length=30)
     created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.player_name
